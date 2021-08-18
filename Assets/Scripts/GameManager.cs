@@ -8,6 +8,15 @@ public class GameManager : MonoBehaviour
 {
     public InputMaster controls;
 
+    [SerializeField]
+    private GameObject[] switches;
+
+    public Switch.State[] startSwitchesState;
+
+    private List<(int, int)> history = new List<(int, int)>();
+
+    private bool isGameOver = true;
+
     //public TransitionBackwards transitionBackwards;
 
     void Awake() {
@@ -24,7 +33,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        foreach(GameObject mySwitch in switches) {
+            Switch switchScript = mySwitch.GetComponent<Switch>();
+            isGameOver = isGameOver && switchScript.switchState == Switch.State.On;
+            
+        }
+
+        if (isGameOver) {
+            print("Game Over! You Won !");
+        }
+
+        isGameOver = true;
+
     }
 
     void MouseLeftClickFunc() {
@@ -35,11 +55,56 @@ public class GameManager : MonoBehaviour
             if (hit.transform.name == "MenuButton") {
                 SceneManager.LoadScene(0);
             } else if (hit.transform.name == "RedoButton") {
-                print("Redo");
+                redo();
             } else if (hit.transform.name == "RestartButton") {
-                print("Restart");
+                restartLevel();
             }
         }
+    }
+
+    void redo() {
+
+        if (history.Count != 0) {
+
+            (int, int) lastSwitchCoordinates = history[history.Count - 1];
+
+            GameObject lastSwitch = GameObject.Find("Switch_" + lastSwitchCoordinates.Item1 + "x" + lastSwitchCoordinates.Item2);
+
+            Switch lastSwitchScript = lastSwitch.GetComponent<Switch>();
+            lastSwitchScript.changeState(lastSwitch);
+
+            foreach(GameObject neighborSwitchOfLastSwitch in lastSwitchScript.neighborSwitches) {
+
+                if (neighborSwitchOfLastSwitch != null) {
+                    Switch neighborSwitchOfLastSwitchScript = neighborSwitchOfLastSwitch.GetComponent<Switch>();
+                    neighborSwitchOfLastSwitchScript.changeState(neighborSwitchOfLastSwitch);
+                }
+            }
+
+            history.RemoveAt(history.Count - 1);
+        }
+
+    }
+
+    void restartLevel() {
+        
+        int i = 0;
+
+        foreach (GameObject mySwitch in switches) {
+            
+            Switch switchScript = mySwitch.GetComponent<Switch>();
+            
+            if (switchScript.switchState != startSwitchesState[i]) {
+
+                switchScript.changeState(mySwitch);
+            }
+            ++i;
+        }
+    }
+
+    public void addToHistory((int, int) log) {
+
+        history.Add(log);
     }
 
     private void OnEnable() {

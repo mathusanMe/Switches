@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8676031592199277815}
   - component: {fileID: 8676031592199277814}
   - component: {fileID: 8676031592199277813}
-  - component: {fileID: 8676031592199277812}
   m_Layer: 0
   m_Name: Switch_Start_State_Off
   m_TagString: Untagged
@@ -27,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8676031592199277770}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.8026614, y: -0.007923746, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -73,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 962374bf8ee105944ba8618b2ebc2981, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -116,63 +115,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd084e65ec0497848a922b880b176efa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  neighborSwitches:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   switchSelectedStateOn: {fileID: 21300000, guid: d4c0304101f1f7348a1e79e01bb0efea, type: 3}
   switchSelectedStateOff: {fileID: 21300000, guid: 793dd65bdcd5d1d44ae573736bbee462, type: 3}
   switchUnSelectedStateOn: {fileID: 21300000, guid: 9fe306de309880048b10b560ef462f65, type: 3}
   switchUnSelectedStateOff: {fileID: 21300000, guid: 962374bf8ee105944ba8618b2ebc2981, type: 3}
+  coordinates: 0100000002000000
   switchState: 1
---- !u!60 &8676031592199277812
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8676031592199277770}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 1.3}
-    newSize: {x: 1.5, y: 1.3}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.7, y: -0.62}
-      - {x: 0.7, y: -0.65}
-      - {x: 0.75, y: -0.65}
-      - {x: 0.75, y: -0.58}
-      - {x: 0.74, y: -0.58}
-    - - {x: 0.66999996, y: 0.01}
-      - {x: 0.59999996, y: 0.089999996}
-      - {x: 0.44, y: 0.19}
-      - {x: 0.17, y: 0.37}
-      - {x: 0.089999996, y: 0.41}
-      - {x: -0.07, y: 0.41}
-      - {x: -0.26999998, y: 0.29999998}
-      - {x: -0.44, y: 0.14999999}
-      - {x: -0.59999996, y: 0.07}
-      - {x: -0.68, y: -0.01}
-      - {x: -0.68, y: -0.099999994}
-      - {x: -0.66999996, y: -0.22}
-      - {x: -0.65, y: -0.26}
-      - {x: -0.56, y: -0.31}
-      - {x: -0.29999998, y: -0.5}
-      - {x: -0.14999999, y: -0.57}
-      - {x: 0.14, y: -0.57}
-      - {x: 0.45999998, y: -0.38}
-      - {x: 0.53999996, y: -0.32}
-      - {x: 0.66999996, y: -0.22}
-    - - {x: -0.75, y: 0.65}
-      - {x: -0.75, y: 0.59999996}
-      - {x: -0.74, y: 0.59999996}
-      - {x: -0.7, y: 0.64}
-      - {x: -0.7, y: 0.65}
