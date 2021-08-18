@@ -1,0 +1,33 @@
+{
+    "name": "InputMaster",
+    "maps": [
+        {
+            "name": "UI",
+            "id": "5e36bb4f-6feb-4ce4-8f98-3200fbba22c0",
+            "actions": [
+                {
+                    "name": "Mouse Left Click",
+                    "type": "Button",
+                    "id": "c9a40c51-e7d0-4573-a698-37b5e4411d9f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "dd45ed4e-e8b7-4bd1-b070-3a01333c6920",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse Left Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
