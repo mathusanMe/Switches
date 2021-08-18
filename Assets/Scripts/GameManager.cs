@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     public Switch.State[] startSwitchesState;
 
+    private GameObject latestSwitch;
+
     private List<(int, int)> history = new List<(int, int)>();
 
     private bool isGameOver = true;
@@ -64,26 +66,58 @@ public class GameManager : MonoBehaviour
 
     void redo() {
 
-        if (history.Count != 0) {
+        if (latestSwitch) {
 
-            (int, int) lastSwitchCoordinates = history[history.Count - 1];
+            Animator latestSwitchAnim = latestSwitch.GetComponent<Animator>();
 
-            GameObject lastSwitch = GameObject.Find("Switch_" + lastSwitchCoordinates.Item1 + "x" + lastSwitchCoordinates.Item2);
+            if (!(latestSwitchAnim.GetCurrentAnimatorStateInfo(0).IsTag("0") || latestSwitchAnim.GetCurrentAnimatorStateInfo(0).IsTag("1"))) {
 
-            Switch lastSwitchScript = lastSwitch.GetComponent<Switch>();
-            lastSwitchScript.changeState(lastSwitch);
+                if (history.Count != 0) {
 
-            foreach(GameObject neighborSwitchOfLastSwitch in lastSwitchScript.neighborSwitches) {
+                    (int, int) lastSwitchCoordinates = history[history.Count - 1];
 
-                if (neighborSwitchOfLastSwitch != null) {
-                    Switch neighborSwitchOfLastSwitchScript = neighborSwitchOfLastSwitch.GetComponent<Switch>();
-                    neighborSwitchOfLastSwitchScript.changeState(neighborSwitchOfLastSwitch);
+                    GameObject lastSwitch = GameObject.Find("Switch_" + lastSwitchCoordinates.Item1 + "x" + lastSwitchCoordinates.Item2);
+
+                    Switch lastSwitchScript = lastSwitch.GetComponent<Switch>();
+                    lastSwitchScript.changeState(lastSwitch);
+
+                    foreach(GameObject neighborSwitchOfLastSwitch in lastSwitchScript.neighborSwitches) {
+
+                        if (neighborSwitchOfLastSwitch != null) {
+                            Switch neighborSwitchOfLastSwitchScript = neighborSwitchOfLastSwitch.GetComponent<Switch>();
+                            neighborSwitchOfLastSwitchScript.changeState(neighborSwitchOfLastSwitch);
+                        }
+                    }
+
+                    history.RemoveAt(history.Count - 1);
+
+                    latestSwitch = lastSwitch;
                 }
             }
+        } else {
 
-            history.RemoveAt(history.Count - 1);
+            if (history.Count != 0) {
+
+                    (int, int) lastSwitchCoordinates = history[history.Count - 1];
+
+                    GameObject lastSwitch = GameObject.Find("Switch_" + lastSwitchCoordinates.Item1 + "x" + lastSwitchCoordinates.Item2);
+
+                    Switch lastSwitchScript = lastSwitch.GetComponent<Switch>();
+                    lastSwitchScript.changeState(lastSwitch);
+
+                    foreach(GameObject neighborSwitchOfLastSwitch in lastSwitchScript.neighborSwitches) {
+
+                        if (neighborSwitchOfLastSwitch != null) {
+                            Switch neighborSwitchOfLastSwitchScript = neighborSwitchOfLastSwitch.GetComponent<Switch>();
+                            neighborSwitchOfLastSwitchScript.changeState(neighborSwitchOfLastSwitch);
+                        }
+                    }
+
+                    history.RemoveAt(history.Count - 1);
+
+                    latestSwitch = lastSwitch;
+            }
         }
-
     }
 
     void restartLevel() {
