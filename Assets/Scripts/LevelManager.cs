@@ -42,6 +42,7 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         foreach(GameObject mySwitch in switches) {
+            
             Switch switchScript = mySwitch.GetComponent<Switch>();
             isGameOver = isGameOver && switchScript.switchState == Switch.State.On;
         }
@@ -49,22 +50,29 @@ public class LevelManager : MonoBehaviour
         if (isGameOver && history.Count != previousHistoryCount) {
 
             gameManagerScript.nextLevel();
-            previousHistoryCount += 1;
+            previousHistoryCount = history.Count;
         }
 
         isGameOver = true;
     }
 
     void MouseLeftClickFunc() {
+        
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
 
         if (hit) {
+            
             if (hit.transform.name == "MenuButton") {
+                
                 SceneManager.LoadScene(0);
+
             } else if (hit.transform.name == "RedoButton") {
+                
                 redo();
+
             } else if (hit.transform.name == "RestartButton") {
+                
                 restartLevel();
             }
         }

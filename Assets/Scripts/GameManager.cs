@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public float speed;
     public Vector3 Direction;
 
+    public float duration;
+
     public AnimationCurve AnimCurve;
 
     // Start is called before the first frame update
@@ -25,7 +27,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (changeLvl) {
-            
+
             Transform previousLvlTransform = levels[nextLevelIndex - 1].GetComponent<Transform>();
 
             if (previousLvlTransform.position.x > -12f) {
@@ -43,18 +45,23 @@ public class GameManager : MonoBehaviour
                     
                     currentLvlTransform.position += Direction.normalized * speed * AnimCurve.Evaluate(Time.time) * Time.deltaTime;
                 
+                } else {
+
+                    changeLvl = false;
                 }
             }
         }
     }
 
     IEnumerator Wait() {
-        yield return new WaitForSeconds(1.0f);
+        
+        yield return new WaitForSeconds(duration);
 
         changeLvl = true;
     }
 
     public void nextLevel() {
+        
         nextLevelIndex += 1;
 
         if (nextLevelIndex < levels.Length) {
