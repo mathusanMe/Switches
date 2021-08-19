@@ -8,11 +8,11 @@ public class Switch : MonoBehaviour
     public InputMaster controls;
     //public Transition transition;
 
-    public GameObject gameManager;
+    public GameObject levelManager;
     
     public GameObject[] neighborSwitches = new GameObject[4];
 
-    private GameManager gameManagerScript;  
+    private LevelManager levelManagerScript;
     
     [SerializeField]
     private Sprite switchSelectedStateOn;
@@ -44,7 +44,7 @@ public class Switch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManagerScript = gameManager.GetComponent<GameManager>();
+        levelManagerScript = levelManager.GetComponent<LevelManager>();
 
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         switchAnim = GetComponent<Animator>();
@@ -106,7 +106,7 @@ public class Switch : MonoBehaviour
                         }
                     }
 
-                    gameManagerScript.addToHistory((coordinates[0], coordinates[1]));
+                    levelManagerScript.addToHistory((coordinates[0], coordinates[1]));
 
                 } else if (switchState == State.Off && !(switchAnim.GetCurrentAnimatorStateInfo(0).IsTag("0") || switchAnim.GetCurrentAnimatorStateInfo(0).IsTag("1"))) {
 
@@ -119,7 +119,7 @@ public class Switch : MonoBehaviour
                         }
                     }
 
-                    gameManagerScript.addToHistory((coordinates[0], coordinates[1]));
+                    levelManagerScript.addToHistory((coordinates[0], coordinates[1]));
                 }
             }
         }
